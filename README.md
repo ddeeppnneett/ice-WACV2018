@@ -10,7 +10,7 @@ The code is developed with CUDA 8.0, ***Python 2.7***, ***PyTorch >= 0.4***
 
 ### Data Preparation
 
-Download the raw data at ftp://data.cresis.ku.edu/data/rds/2014_Greenland_P3/CSARP_music3D/
+Download the raw data at [ftp://data.cresis.ku.edu/data/rds/2014_Greenland_P3/CSARP_music3D/](ftp://data.cresis.ku.edu/data/rds/2014_Greenland_P3/CSARP_music3D/)
 
 Download the human-labled annotations at ./data/target.tar.gz
 
