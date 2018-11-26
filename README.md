@@ -17,26 +17,26 @@ The code is developed with CUDA 8.0, ***Python 2.7***, ***PyTorch >= 0.4***
 - If you don't want to preprocess the data yourself, please use [`create_slices.m`](./scripts/create_slices_64x64/create_slices.m) to generate radar images and [`convert_mat_to_npy.py`](./scripts/convert_mat_to_npy.py) to convert them from MATLAB to NumPy files.
 
 3. Make sure to put the files as the following structure:
-  ```
-  data_root
-  ├── slices_mat_64x64
-  |   ├── 20140325_05
-  │   ├── 20140325_06
-  |   ├── 20140325_07
-  │   ├── ...
-  |
-  ├── slices_npy_64x64
-  |   ├── 20140325_05
-  │   ├── 20140325_06
-  |   ├── 20140325_07
-  |   ├── ...
-  |
-  └── target
-      ├── Data_20140325_05_001.txt
-      ├── Data_20140325_05_002.txt
-      ├── Data_20140325_06_001.txt
-      ├── ...
-  ```
+    ```
+    data_root
+    ├── slices_mat_64x64
+    |   ├── 20140325_05
+    │   ├── 20140325_06
+    |   ├── 20140325_07
+    │   ├── ...
+    |
+    ├── slices_npy_64x64
+    |   ├── 20140325_05
+    │   ├── 20140325_06
+    |   ├── 20140325_07
+    |   ├── ...
+    |
+    └── target
+        ├── Data_20140325_05_001.txt
+        ├── Data_20140325_05_002.txt
+        ├── Data_20140325_06_001.txt
+        ├── ...
+    ```
 
 ### Pretrained Models
 
