@@ -10,13 +10,13 @@ The code is developed with CUDA 8.0, ***Python 2.7***, ***PyTorch >= 0.4***
 
 ### Data Preparation
 
-Download the raw data at `ftp://data.cresis.ku.edu/data/rds/2014_Greenland_P3/CSARP_music3D/`
+1. Download the raw data at `ftp://data.cresis.ku.edu/data/rds/2014_Greenland_P3/CSARP_music3D/`
 
-Download the human-labled annotations at ./data/target.tar.gz
+2. Download the human-labled annotations at [`target.tar.gz`](./data/target.tar.gz)
 
-If you don't want to preprocess the data yourself, please use create_slices.m to generate radar images and convert_mat_to_npy.py to convert them from MATLAB to NumPy files.
+- If you don't want to preprocess the data yourself, please use [`create_slices.m`](./scripts/create_slices_64x64/create_slices.m) to generate radar images and [`convert_mat_to_npy.py`](./scripts/convert_mat_to_npy.py) to convert them from MATLAB to NumPy files.
 
-And make sure to put the files as the following structure:
+3. Make sure to put the files as the following structure:
   ```
   data_root
   ├── slices_mat_64x64
@@ -40,12 +40,12 @@ And make sure to put the files as the following structure:
 
 ### Pretrained Models
 
-Download the pretrained model at ./pretrained_models
+Download the pretrained model at [`pretrained_models`](./pretrained_models)
 
 ### Demo
 To run the demo:
 ```
-python demo.py --data_root {path/to/data_root} --c3d_pth {path/to/the/c3d.pth} --rnn_pth {path/to/the/c3d.pth}
+python demo.py --data_root {path/to/data_root} --c3d_pth {path/to/c3d.pth} --rnn_pth {path/to/rnn.pth}
 ```
 
 ### Citations
