@@ -1,54 +1,93 @@
-## Multi-Task Spatiotemporal Neural Networks for Structured Surface Reconstruction
+# Multi-Task Spatiotemporal Neural Networks for Structured Surface Reconstruction
 
-Created by Mingze Xu at Indiana University, Bloomington, IN
+## Introduction
 
-***Note:*** The released code and pretrained models are reimplemented on the following larger dataset.
+This is a PyTorch implementation of our WACV 2018 paper "[`Multi-Task Spatiotemporal Neural Networks for Structured Surface Reconstruction`](https://arxiv.org/pdf/1801.03986.pdf)".
 
-### Environment
+![Alt Text](demo/Movie_20140401_03_033.gif)
 
-The code is developed with CUDA 8.0, ***Python 2.7***, ***PyTorch >= 0.4***
+***Note:*** The pretrained models are trained on the [`split1`](./data/ice.json) of following larger dataset.
 
-### Data Preparation
+## Environment
+
+- The code is developed with CUDA 9.0, ***Python >= 3.6***, ***PyTorch >= 1.0***
+
+## Data Preparation
 
 1. Download the raw data at `ftp://data.cresis.ku.edu/data/rds/2014_Greenland_P3/CSARP_music3D/`
 
-2. Download the human-labled annotations at [`target.tar.gz`](./data/target.tar.gz)
+    - If you don't want to preprocess the data by yourself, please use [`create_slices.m`](./scripts/create_slices_64x64/create_slices.m) to generate radar images and [`convert_mat_to_npy.py`](./scripts/convert_mat_to_npy.py) to convert them from MATLAB to NumPy files.
 
-- If you don't want to preprocess the data yourself, please use [`create_slices.m`](./scripts/create_slices_64x64/create_slices.m) to generate radar images and [`convert_mat_to_npy.py`](./scripts/convert_mat_to_npy.py) to convert them from MATLAB to NumPy files.
-
-3. Make sure to put the files as the following structure:
+2. Make sure to put the files as the following structure:
     ```
-    data_root
+    YOUR_PATH_TO_CRESIS_DATASET
     ├── slices_mat_64x64
     |   ├── 20140325_05
-    │   ├── 20140325_06
-    |   ├── 20140325_07
+    |   |   ├── 001
+    |   |   |   ├── 00001.mat
+    |   |   |   ├── ...
+    |   |   ├── ...
     │   ├── ...
     |
     ├── slices_npy_64x64
     |   ├── 20140325_05
-    │   ├── 20140325_06
-    |   ├── 20140325_07
+    |   |   ├── 001
+    |   |   |   ├── 00001.npy
+    |   |   |   ├── ...
+    |   |   ├── ...
     |   ├── ...
-    |
-    └── target
-        ├── Data_20140325_05_001.txt
-        ├── Data_20140325_05_002.txt
-        ├── Data_20140325_06_001.txt
-        ├── ...
     ```
 
-### Pretrained Models
+3. Create softlinks of datasets:
+    ```
+    cd ice-wacv2018
+    ln -s YOUR_PATH_TO_CRESIS_DATASET data/CReSIS
+    ln -s data/target data/CReSIS/target
+    ```
 
-Download the pretrained model at [`pretrained_models`](./pretrained_models)
+## Pretrained Models
 
-### Demo
-To run the demo:
+- Download the pretrained model at [`model_zoo`](./model_zoo).
+
+## Training
+
+- C3D
 ```
-python demo.py --data_root {path/to/data_root} --c3d_pth {path/to/c3d.pth} --rnn_pth {path/to/rnn.pth}
+cd ice-wacv2018
+# Default Hyperparameters
+python tools/c3d/train.py
+# OR
+python tools/c3d/train.py --gpu XXX --batch_size XXX --lr XXX
 ```
 
-### Citations
+- Extract C3D Features
+```
+cd ice-wacv2018
+# Default Hyperparameters and Paths
+python tools/c3d/extract_features.py
+# OR
+python tools/c3d/extract_features.py --gpu XXX --checkpoint YOUR_PATH_TO_C3D --batch_size XXX
+```
+
+- RNN
+```
+cd ice-wacv2018
+# Default Hyperparameters
+python tools/rnn/train.py
+# OR
+python tools/rnn/train.py --gpu XXX --batch_size XXX --lr XXX
+```
+
+## Evaluation
+```
+cd ice-wacv2018
+# Default Hyperparameters and Paths
+python e2e_run.py
+# OR
+python e2e_run.py --gpu XXX --data_root YOUR_PATH_TO_CRESIS_DATASET --c3d_pth YOUR_PATH_TO_C3D --rnn_pth YOUR_PATH_TO_RNN
+```
+
+## Citations
 
 If you are using the data/code/model provided here in a publication, please cite our papers:
 
